@@ -37,6 +37,46 @@ input,textarea,select{
   min-height: 100vh;
   display: block;
   padding: 0 30px;
+  position: fixed;
+  left: 270px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 0;
+  opacity: 1;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.section.back-section{
+  z-index: 1;
+}
+.section.active{
+  z-index: 2;
+  opacity: 1;
+  -webkit-animation: slideSection 1s ease;
+  animation: slideSection 1s ease;
+}
+@-webkit-keyframes slideSection{
+  0%{
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  100%{
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+  }
+}
+@keyframes slideSection{
+  0%{
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  100%{
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+  }
 }
 .section .container{
   padding-top: 60px;
@@ -86,9 +126,7 @@ input,textarea,select{
   padding-left: 15px;
   padding-right: 15px;
 }
-.main-content{
-  padding-left: 270px;
-}
+
 .container{
   max-width: 1100px;
   width: 100%;
@@ -119,6 +157,59 @@ input,textarea,select{
 .hidden{
   display: none!important;
 }
+/* ======================================================================================================
+                                               Preloader Part Css
+======================================================================================================= */
+.preloader{
+  background-color: #222222;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 150;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+.preloader.opacity-0{
+  opacity: 0;
+}
+.preloader .loader{
+  height: 40px;
+  width: 40px;
+  border: 4px solid #e3e3e3;
+  border-radius: 50%;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin{
+  0%{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100%{
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin{
+  0%{
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100%{
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 /* =====================================================================================================
                                                  Aside Part Css
 ======================================================================================================== */
@@ -131,7 +222,10 @@ input,textarea,select{
   left: 0;
   z-index: 10;
   border-right: 1px solid #e8dfec;
+  overflow-y: auto;
   padding: 30px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .aside .logo{
@@ -171,7 +265,7 @@ input,textarea,select{
   cursor: pointer;
   position: fixed;
   left: 300px;
-  top: 30px;
+  top: 20px;
   z-index: 11;
   border-radius: 5px;
   background: #fdf9ff;
@@ -182,12 +276,17 @@ input,textarea,select{
   align-items: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .aside .nav-toggler span{
   height: 2px;
   width: 18px;
   display: inline-block;
   position: relative;
+}
+.aside .nav-toggler.open span{
+  background-color: transparent;
 }
 .aside .nav-toggler span::before{
   position: absolute;
@@ -197,6 +296,11 @@ input,textarea,select{
   top: -6px;
   left: 0;
 }
+.aside .nav-toggler.open span::before{
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 0px;
+}
 .aside .nav-toggler span::after{
   position: absolute;
   content: '';
@@ -204,6 +308,11 @@ input,textarea,select{
   width: 18px;
   top: 6px;
   left: 0;
+}
+.aside .nav-toggler.open span::after{
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  top: 0px;
 }
 .aside .nav{
   margin: 80px 0;
@@ -900,11 +1009,28 @@ body.dark .shadow-dark{
                                                Responsive Part Css
 ======================================================================================================== */
 @media(max-width:1199px){
+  .section .container{
+    padding-top: 70px;
+  }
+  .aside .nav-toggler{
+    display: -ms-flexbox;
+    display: flex;
+    left: 30px;
+  }
+  .aside .nav-toggler.open{
+    left: 300px;
+  }
   .aside{
     left: -270px;
   }
-  .main-content{
-    padding-left: 0;
+  .aside.open{
+    left: 0;
+  }
+  .section{
+    left: 0;
+  }
+  .section.open{
+    left: 270px;
   }
   .about .about-content .personal-info .info-item p i{
     margin-left: 0;
