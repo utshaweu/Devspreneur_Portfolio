@@ -7,6 +7,15 @@
   border: 1px solid #d4d4e3;
   border-right: none;
   padding: 15px;
+  border-radius: 0 0 0 5px;
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.style-switcher.open{
+  -webkit-transform: translateX(0%);
+  transform: translateX(0%);
 }
 .style-switcher h5{
   font-size: 16px;
@@ -20,6 +29,8 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  display: block;
+  margin-bottom: 5px;
 }
 .style-switcher ul li{
   display: inline-block;
